@@ -1,0 +1,20 @@
+# Секреты и локальные данные
+.env
+.env.local
+*.env
+!.env.example
+
+# Docker volumes (если где-то окажутся локально)
+data/
+volumes/
+
+# Скриншоты с локального компа (по желанию)
+# img/*.png
+
+# ОС и редакторы
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*~

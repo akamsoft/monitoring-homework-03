@@ -1,13 +1,8 @@
-Понял — теперь вопросы берём **дословно из текста задания**, а ответы даём из контекста вашего решения со ссылками на скриншоты. Ниже — готовый `README.md`.
-
----
-
-```markdown
 # Домашнее задание к занятию 14 «Средство визуализации Grafana»
 
 ## Задание повышенной сложности
 
-### ❓ При решении задания 1 не используйте директорию `help` для сборки проекта. Самостоятельно разверните grafana, где в роли источника данных будет выступать prometheus, а сборщиком данных будет node-exporter: grafana; prometheus-server; prometheus node-exporter.
+### При решении задания 1 не используйте директорию `help` для сборки проекта. Самостоятельно разверните grafana, где в роли источника данных будет выступать prometheus, а сборщиком данных будет node-exporter: grafana; prometheus-server; prometheus node-exporter.
 
 **Ответ.** Стек развёрнут вручную через `docker-compose.yml` (без директории `help`). Три сервиса в одной Docker-сети `monitoring`:
 
@@ -27,7 +22,7 @@ docker compose up -d
 docker compose ps
 ```
 
-### ❓ Приведите все конфигурации, скрипты, манифесты, которые вы использовали в процессе решения задания.
+### Приведите все конфигурации, скрипты, манифесты, которые вы использовали в процессе решения задания.
 
 **Ответ.**
 
@@ -154,15 +149,15 @@ SMTP_PASSWORD=your_app_password
 
 ## Задание 1
 
-### ❓ Зайдите в веб-интерфейс grafana, используя авторизационные данные, указанные в манифесте docker-compose.
+### Зайдите в веб-интерфейс grafana, используя авторизационные данные, указанные в манифесте docker-compose.
 
 **Ответ.** Grafana доступна по адресу `http://localhost:3000`. Логин и пароль заданы в `docker-compose.yml` через переменные `GF_SECURITY_ADMIN_USER` / `GF_SECURITY_ADMIN_PASSWORD`, которые подставляются из `.env`. В репозитории хранится только `.env.example` с заглушками, реальный `.env` — локально и не коммитится. Пароль сгенерирован командой `openssl rand -hex 24`.
 
-### ❓ Подключите поднятый вами prometheus, как источник данных.
+### Подключите поднятый вами prometheus, как источник данных.
 
 **Ответ.** В Grafana: **Connections → Data sources → Add data source → Prometheus**. URL — `http://prometheus:9090` (имя сервиса в Docker-сети, не `localhost`). Нажал **Save & Test** → статус «Data source is working».
 
-### ❓ Решение домашнего задания — скриншот веб-интерфейса grafana со списком подключенных Datasource.
+### Решение домашнего задания — скриншот веб-интерфейса grafana со списком подключенных Datasource.
 
 **Ответ.**
 
@@ -172,7 +167,7 @@ SMTP_PASSWORD=your_app_password
 
 ## Задание 2
 
-### ❓ Создайте Dashboard и в ней создайте Panels: утилизация CPU для node-exporter (в процентах, 100-idle); CPULA 1/5/15; количество свободной оперативной памяти; количество места на файловой системе.
+### Создайте Dashboard и в ней создайте Panels: утилизация CPU для node-exporter (в процентах, 100-idle); CPULA 1/5/15; количество свободной оперативной памяти; количество места на файловой системе.
 
 **Ответ.** Создан Dashboard **Node Exporter Monitoring** с четырьмя панелями.
 
@@ -202,7 +197,7 @@ node_memory_MemAvailable_bytes
 node_filesystem_avail_bytes{fstype!~"tmpfs|overlay"}
 ```
 
-### ❓ Для решения этого задания приведите promql-запросы для выдачи этих метрик, а также скриншот получившейся Dashboard.
+### Для решения этого задания приведите promql-запросы для выдачи этих метрик, а также скриншот получившейся Dashboard.
 
 **Ответ.** PromQL-запросы приведены выше. Скриншот Dashboard:
 
@@ -212,7 +207,7 @@ node_filesystem_avail_bytes{fstype!~"tmpfs|overlay"}
 
 ## Задание 3
 
-### ❓ Создайте для каждой Dashboard подходящее правило alert.
+### Создайте для каждой Dashboard подходящее правило alert.
 
 **Ответ.** Для Dashboard **Node Exporter Monitoring** создано правило **High CPU utilization**:
 
@@ -221,7 +216,7 @@ node_filesystem_avail_bytes{fstype!~"tmpfs|overlay"}
 - **Evaluate every**: `1m`, **For**: `5m` (защита от ложных срабатываний).
 - **Contact point**: `My Email`.
 
-### ❓ При решении задания 3 вы должны самостоятельно завести удобный для вас канал нотификации, например, Telegram или email, и отправить туда тестовые события.
+### При решении задания 3 вы должны самостоятельно завести удобный для вас канал нотификации, например, Telegram или email, и отправить туда тестовые события.
 
 **Ответ.** Использован **email** через SMTP Яндекса.
 
@@ -230,13 +225,13 @@ node_filesystem_avail_bytes{fstype!~"tmpfs|overlay"}
 3. В Grafana: **Alerting → Contact points → New contact point**, тип **Email**, адрес `alexkam75@yandex.ru`. Нажал **Test** → «Test notification sent successfully», письмо пришло.
 4. Привязал этот contact point к правилу алерта `High CPU utilization` и сохранил.
 
-### ❓ В решении приведите скриншоты тестовых событий из каналов нотификаций.
+### В решении приведите скриншоты тестовых событий из каналов нотификаций.
 
 **Ответ.** Скриншот тестового письма от Grafana:
 
 ![Email test](./img/email-test.png)
 
-### ❓ В качестве решения задания приведите скриншот вашей итоговой Dashboard.
+### В качестве решения задания приведите скриншот вашей итоговой Dashboard.
 
 **Ответ.** Скриншот списка Alert rules с привязанным contact point:
 
@@ -246,11 +241,11 @@ node_filesystem_avail_bytes{fstype!~"tmpfs|overlay"}
 
 ## Задание 4
 
-### ❓ Сохраните ваш Dashboard. Для этого перейдите в настройки Dashboard, выберите в боковом меню «JSON MODEL». Далее скопируйте отображаемое json-содержимое в отдельный файл и сохраните его.
+### Сохраните ваш Dashboard. Для этого перейдите в настройки Dashboard, выберите в боковом меню «JSON MODEL». Далее скопируйте отображаемое json-содержимое в отдельный файл и сохраните его.
 
 **Ответ.** В Grafana 13+ JSON-модель вынесена из «Dashboard settings» в боковую панель: **Edit → Dashboard options → Edit as code**. Скопировал содержимое в файл `dashboard.json` в корне репозитория. Проверил валидность командой `python3 -m json.tool dashboard.json`.
 
-### ❓ В качестве решения задания приведите листинг этого файла.
+### В качестве решения задания приведите листинг этого файла.
 
 **Ответ.** Листинг `dashboard.json` (4 панели: CPU, Load Average, Free RAM, Free Disk):
 
@@ -619,47 +614,5 @@ node_filesystem_avail_bytes{fstype!~"tmpfs|overlay"}
   }
 }
 ```
-```
 
----
 
-### ⚠️ Что учесть
-
-1. **JSON в README я сократил** (убрал дублирующиеся поля, оставил всё содержательное: 4 панели, запросы, визуализации, layout). Если хотите вставить **дословно свой экспорт**, просто замените блок `json` на содержимое вашего `dashboard.json` целиком — валидность от этого не пострадает.
-2. **Вопросы в README — дословно из текста задания**, разбитые по смыслу на отдельные пункты.
-3. **Все 4 скриншота** должны лежать в `img/`:
-
-   ```bash
-   ls -la img/
-   # datasources.png  dashboard.png  alerts.png  email-test.png
-   ```
-
-### 📦 Финальные команды
-
-```bash
-cd ~/monitoring-homework-03
-
-# 1. сохранить README.md (вставить содержимое выше)
-nano README.md
-
-# 2. проверить, что .env не попадёт в Git
-git check-ignore -v .env
-# ожидаем: .gitignore:N:.env    .env
-
-# 3. коммит
-git add .
-git commit -m "Complete homework 14: monitoring stack, dashboard, email alerts and JSON export"
-
-# 4. проверка, что .env не в индексе
-git ls-files | grep -E '^\.env$'
-# пустой вывод = хорошо
-
-# 5. push
-git push -u origin main
-```
-
-После push приложите к ответу ссылку вида:
-
-```
-https://github.com/<ваш-username>/monitoring-homework-03/blob/main/README.md
-```

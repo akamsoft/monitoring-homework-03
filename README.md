@@ -161,7 +161,7 @@ SMTP_PASSWORD=your_app_password
 
 **Ответ.**
 
-![Data Sources](./img/datasources.png)
+![Data Sources](./images/datasources.png)
 
 ---
 
@@ -201,7 +201,7 @@ node_filesystem_avail_bytes{fstype!~"tmpfs|overlay"}
 
 **Ответ.** PromQL-запросы приведены выше. Скриншот Dashboard:
 
-![Dashboard](./img/dashboard.png)
+![Dashboard](./images/dashboard.png)
 
 ---
 
@@ -229,13 +229,13 @@ node_filesystem_avail_bytes{fstype!~"tmpfs|overlay"}
 
 **Ответ.** Скриншот тестового письма от Grafana:
 
-![Email test](./img/email-test.png)
+![Email test](./images/email-test.png)
 
 ### В качестве решения задания приведите скриншот вашей итоговой Dashboard.
 
 **Ответ.** Скриншот списка Alert rules с привязанным contact point:
 
-![Alert rules](./img/alerts.png)
+![Alert rules](./images/alerts.png)
 
 ---
 

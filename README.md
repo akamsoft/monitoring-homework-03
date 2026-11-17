@@ -229,7 +229,7 @@ node_filesystem_avail_bytes{fstype!~"tmpfs|overlay"}
 
 **Ответ.** Скриншот тестового письма от Grafana:
 
-![Email test](./images/email-test.png)
+![Email test](./images/email-alert-firing.png)
 
 ### В качестве решения задания приведите скриншот вашей итоговой Dashboard.
 
